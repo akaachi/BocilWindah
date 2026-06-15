@@ -52,6 +52,53 @@
         }
     </style>
 </head>
+<script>
+
+const supabaseUrl =
+"https://xlrkxskyjjiatvoymylq.supabase.co";
+
+const supabaseKey =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhscmt4c2t5amppYXR2b3lteWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTI3MDIsImV4cCI6MjA5NzA4ODcwMn0.39_bLrPf886g8Vc4zpYiauMQKqAiPoop4qnlMMm9HWI";
+
+const client =
+supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+loadPlayer();
+
+async function loadPlayer(){
+
+    const username =
+        localStorage.getItem("username");
+
+    if(!username){
+        document.getElementById("welcomeText")
+        .innerText = "Hi, Guest! 👋";
+        return;
+    }
+
+    const { data, error } = await client
+        .from("players")
+        .select("*")
+        .eq("username", username)
+        .limit(1);
+
+    if(error || !data || data.length === 0){
+        document.getElementById("welcomeText")
+        .innerText = "Hi, Player! 👋";
+        return;
+    }
+
+    const player = data[0];
+
+    document.getElementById("welcomeText")
+    .innerText =
+    `Hi, ${player.display_name}! 👋`;
+}
+
+</script>
 <body>
 
     <div class="container">
