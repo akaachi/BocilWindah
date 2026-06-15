@@ -100,9 +100,9 @@ async function searchResult() {
             <h2>🎉 Congratulations!</h2>
 <p>You have been accepted into BocilWindah OA.</p>
 
-<a href="claim.html">
-    <button>Claim Your Slot</button>
-</a>
+<button onclick="window.location.href='claim.html?username=${player.username}'">
+    Claim Your Slot
+</button>
         `;
 
     } else if (player.status === "rejected") {
