@@ -83,13 +83,14 @@ console.log("ERROR:", error);
     const result =
     document.getElementById("result");
 
-    if(error || !data){
-        result.innerHTML =
-        `
-        <h2>❌ Username Not Found</h2>
-        `;
-        return;
-    result.innerHTML = `
+if(error || !data){
+    result.innerHTML =
+    `
+    <h2>❌ Username Not Found</h2>
+    `;
+    return;
+
+result.innerHTML = `
 <h2>DEBUG MODE</h2>
 
 <p>Status: ${data.status}</p>
