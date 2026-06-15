@@ -133,10 +133,13 @@ async function claimAccount() {
     return;
 }
 
-    document.getElementById("message")
-    .innerHTML =
-    "🎉 Account Activated!";
-}
+ document.getElementById("message")
+.innerHTML =
+"🎉 Account Activated! Redirecting to login...";
+
+setTimeout(() => {
+    window.location.href = "login.html";
+}, 2000);
 
 </script>
 
