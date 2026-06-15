@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Check Your Result</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{
+    background:#1e1e2f;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:50px;
+}
+
+input{
+    padding:12px;
+    width:300px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-left:10px;
+}
+
+#result{
+    margin-top:30px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>🔍 Check Your Result</h1>
+
+<p>Enter your X Username</p>
+
+<input
+    id="username"
+    placeholder="@username"
+/>
+
+<button onclick="checkResult()">
+Search
+</button>
+
+<div id="result"></div>
+
+<script>
+
+// GANTI NANTI
+const supabaseUrl =
+"https://xlrkxskyjjiatvoymylq.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhscmt4c2t5amppYXR2b3lteWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTI3MDIsImV4cCI6MjA5NzA4ODcwMn0.39_bLrPf886g8Vc4zpYiauMQKqAiPoop4qnlMMm9HWI";
+
+const supabase =
+supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+async function checkResult() {
+
+    const username =
+    document.getElementById("username").value;
+
+    const { data, error } =
+    await supabase
+        .from("applications")
+        .select("*")
+        .eq("username_x", username)
+        .single();
+
+    const result =
+    document.getElementById("result");
+
+    if(error || !data){
+        result.innerHTML =
+        `
+        <h2>❌ Username Not Found</h2>
+        `;
+        return;
+    }
+
+    if(data.status === "accepted"){
+
+        result.innerHTML =
+        `
+        <h2>🎉 Congratulations!</h2>
+
+        <p>
+        You have successfully passed the screening process.
+        </p>
+
+        <button>
+        Claim Your Slot
+        </button>
+        `;
+    }
+
+    else if(data.status === "rejected"){
+
+        result.innerHTML =
+        `
+        <h2>🤍 Hi ${data.oc_name}</h2>
+
+        <p>
+        Thank you for your enthusiasm and for taking the time to join us.
+        Unfortunately, we couldn't offer you a spot this time.
+        </p>
+        `;
+    }
+
+    else{
+
+        result.innerHTML =
+        `
+        <h2>⏳ Application Under Review</h2>
+        `;
+    }
+}
+</script>
+
+</body>
+</html>
