@@ -89,44 +89,13 @@ console.log("ERROR:", error);
         <h2>❌ Username Not Found</h2>
         `;
         return;
-    }
+    result.innerHTML = `
+<h2>DEBUG MODE</h2>
 
-    if(data.status === "accepted"){
+<p>Status: ${data.status}</p>
 
-        result.innerHTML =
-        `
-        <h2>🎉 Congratulations!</h2>
-
-        <p>
-        You have successfully passed the screening process.
-        </p>
-
-        <button>
-        Claim Your Slot
-        </button>
-        `;
-    }
-
-    else if(data.status === "rejected"){
-
-        result.innerHTML =
-        `
-        <h2>🤍 Hi ${data.oc_name}</h2>
-
-        <p>
-        Thank you for your enthusiasm and for taking the time to join us.
-        Unfortunately, we couldn't offer you a spot this time.
-        </p>
-        `;
-    }
-
-    else{
-
-        result.innerHTML =
-        `
-        <h2>⏳ Application Under Review</h2>
-        `;
-    }
+<pre>${JSON.stringify(data, null, 2)}</pre>
+`;
 }
 </script>
 
