@@ -172,7 +172,9 @@ body{
 
     <div class="topBar">
 
-        <h1>Hi, Evan! 👋</h1>
+        <h1 id="welcomeText">
+    Hi, Guest! 👋
+</h1>
 
         <div class="weekBox">
             Week 1
@@ -188,37 +190,15 @@ body{
             🏆 Leaderboard
         </div>
 
-        <div class="accountBox">
-            My Account
-        </div>
-
-    </div>
+        <div class="accountBox" id="accountBox">
+    My Account
+</div>
 
     <!-- TABS -->
 
-    <div class="tabMenu">
+    <div class="tabMenu" id="tabMenu">
 
-        <button class="tabButton activeTab">
-            Home
-        </button>
-
-        <button class="tabButton">
-            Check-in
-        </button>
-
-        <button class="tabButton">
-            Play
-        </button>
-
-        <button class="tabButton">
-            Rules
-        </button>
-
-        <button class="tabButton">
-            Player Status
-        </button>
-
-    </div>
+</div>
 
     <!-- MAIN CONTENT -->
 
@@ -271,6 +251,65 @@ body{
     </div>
 
 </div>
+<script>
 
+const username =
+    localStorage.getItem("username");
+
+const welcomeText =
+    document.getElementById("welcomeText");
+
+const tabMenu =
+    document.getElementById("tabMenu");
+
+if(username){
+
+    welcomeText.innerText =
+        `Hi, ${username}! 👋`;
+
+    tabMenu.innerHTML = `
+        <button class="tabButton activeTab">
+            Home
+        </button>
+
+        <button class="tabButton">
+            Rules
+        </button>
+
+        <button class="tabButton">
+            Check-in
+        </button>
+
+        <button class="tabButton">
+            Play
+        </button>
+
+        <button class="tabButton">
+            Player Status
+        </button>
+    `;
+
+}else{
+
+    welcomeText.innerText =
+        "Hi, Guest! 👋";
+
+    tabMenu.innerHTML = `
+        <button class="tabButton activeTab">
+            Home
+        </button>
+
+        <button class="tabButton">
+            Concept
+        </button>
+
+        <button class="tabButton">
+            Rules
+        </button>
+    `;
+
+}
+
+</script>
 </body>
 </html>
