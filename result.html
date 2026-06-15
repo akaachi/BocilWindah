@@ -71,12 +71,14 @@ async function checkResult() {
     const username =
     document.getElementById("username").value;
 
-    const { data, error } =
-    await client
-        .from("applications")
-        .select("*")
-        .eq("username", username)
-        .single();
+        const { data, error } =
+await client
+    .from("applications")
+    .select("*")
+    .eq("username", username);
+
+console.log("DATA:", data);
+console.log("ERROR:", error);
 
     const result =
     document.getElementById("result");
