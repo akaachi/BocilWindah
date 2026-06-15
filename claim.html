@@ -125,10 +125,13 @@ async function claimAccount() {
         .eq("username", username);
 
     if(error){
-        document.getElementById("message")
-        .innerHTML = "Error saving account";
-        return;
-    }
+    console.log(error);
+
+    document.getElementById("message")
+    .innerHTML = error.message;
+
+    return;
+}
 
     document.getElementById("message")
     .innerHTML =
