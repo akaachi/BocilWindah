@@ -72,7 +72,7 @@ async function checkResult() {
     document.getElementById("username").value;
 
     const { data, error } =
-    await supabase
+    await client
         .from("applications")
         .select("*")
         .eq("username_x", username)
