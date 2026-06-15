@@ -30,13 +30,34 @@ button{
 
 <body>
 
-<h1>Claim Your Slot</h1>
+<h1>🎉 Claim Your Slot</h1>
 
 <p id="usernameText"></p>
 
-<input id="displayName" placeholder="Display Name">
+<p>
+You've been accepted into BocilWindah OA.<br>
+Create your account below to activate your player profile.
+</p>
+
+<p>X Username</p>
 
 <input
+    id="usernameField"
+    readonly
+>
+
+<p>What would you like to be called?</p>
+
+<input
+    id="displayName"
+    placeholder="OC name, nickname, etc."
+>
+
+<p style="font-size:12px;">
+You can use your OC name, nickname, or any name you'd like other players to see.
+</p>
+    
+  <input
     id="password"
     type="password"
     placeholder="Password">
@@ -73,7 +94,10 @@ const username =
 params.get("username");
 
 document.getElementById("usernameText")
-.innerText = "Username: " + username;
+.innerText = `Hi, ${username}! 👋`;
+
+document.getElementById("usernameField")
+.value = username;
 
 async function claimAccount() {
 
