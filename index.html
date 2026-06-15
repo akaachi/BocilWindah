@@ -1,177 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BocilWindah</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    
-    <style>
-        body{
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BocilWindah OA</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
     margin:0;
-    font-family:Arial,sans-serif;
+    padding:0;
+}
+
+body{
     background:#1e1e2f;
     color:white;
+    font-family:Arial,sans-serif;
 }
 
-       .container{
-    width:90%;
-    max-width:900px;
-    margin:40px auto;
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:20px auto;
 }
 
-        h1 {
-            margin-bottom: 5px;
-        }
+/* ====================
+   TOP BAR
+==================== */
 
-        p {
-            color: #cccccc;
-            margin-bottom: 40px;
-        }
-
-        .menu-button {
-            display: block;
-            width: 100%;
-            padding: 18px;
-            margin: 15px 0;
-            border: none;
-            border-radius: 15px;
-            font-size: 18px;
-            cursor: pointer;
-            background-color: #32324a;
-            color: white;
-            transition: 0.2s;
-        }
-
-        .menu-button:hover {
-            transform: scale(1.03);
-            background-color: #46466b;
-        }
-        
-        #memberArea{
-    display:none;
+.topBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
-    </style>
+
+.topBar h1{
+    font-size:40px;
+}
+
+.weekBox{
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* ====================
+   LEADERBOARD ROW
+==================== */
+
+.leaderboardRow{
+    display:flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.leaderboard{
+    flex:1;
+    height:120px;
+
+    background:#32324a;
+    border-radius:20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:32px;
+}
+
+.accountBox{
+    width:180px;
+
+    background:#32324a;
+    border-radius:20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* ====================
+   TAB MENU
+==================== */
+
+.tabMenu{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tabButton{
+    border:none;
+    border-radius:15px;
+
+    padding:14px 24px;
+
+    background:#32324a;
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+
+    transition:0.2s;
+}
+
+.tabButton:hover{
+    background:#46466b;
+}
+
+.activeTab{
+    background:#5a5a88;
+}
+
+/* ====================
+   MAIN LAYOUT
+==================== */
+
+.mainLayout{
+    display:flex;
+    gap:20px;
+}
+
+.contentArea{
+    flex:1;
+
+    min-height:500px;
+
+    background:#32324a;
+    border-radius:20px;
+
+    padding:30px;
+}
+
+.ctInfo{
+    width:280px;
+
+    background:#32324a;
+    border-radius:20px;
+
+    padding:25px;
+}
+
+/* ====================
+   DEMO CONTENT
+==================== */
+
+.sectionTitle{
+    margin-bottom:20px;
+}
+
+.scheduleCard{
+    background:#46466b;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+</style>
 </head>
 
 <body>
 
-<script>
+<div class="container">
 
-const supabaseUrl =
-"https://xlrkxskyjjiatvoymylq.supabase.co";
+    <!-- HEADER -->
 
-const supabaseKey =
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhscmt4c2t5amppYXR2b3lteWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTI3MDIsImV4cCI6MjA5NzA4ODcwMn0.39_bLrPf886g8Vc4zpYiauMQKqAiPoop4qnlMMm9HWI";
+    <div class="topBar">
 
-const client =
-supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
+        <h1>Hi, Evan! 👋</h1>
 
-async function loadPlayer(){
-console.log(
-    document.getElementById("userArea")
-);
-    const username =
-        localStorage.getItem("username");
-    const memberArea =
-        document.getElementById("memberArea");
-   if(!username){
-
-    document.getElementById("userArea")
-    .innerHTML = `
-        <button class="menu-button">
-            Login
-        </button>
-    `;
-
-    return;
-}
-
-    const { data, error } = await client
-        .from("players")
-        .select("*")
-        .eq("username", username)
-        .limit(1);
-
-    if(error || !data || data.length === 0){
-        document.getElementById("userArea")
-        .innerText = "Hi, Player! 👋";
-        return;
-    }
-
-    const player = data[0];
-
-memberArea.style.display = "block";
-
-document.getElementById("userArea")
-.innerHTML =
-`Hi, ${player.display_name}! 👋`;
-}
-
-</script>
-
-    <div class="container">
-
-    <header>
-
-        <h1>BocilWindah OA</h1>
-
-        <div id="userArea">
-            Loading...
+        <div class="weekBox">
+            Week 1
         </div>
 
-    </header>
+    </div>
 
-    <section>
-        <h2>🏆 Leaderboard</h2>
-    </section>
+    <!-- LEADERBOARD -->
 
-    <section>
-        <h2>📅 Schedule</h2>
-    </section>
+    <div class="leaderboardRow">
 
-    <section>
-        <h2>🎯 Concept</h2>
-    </section>
+        <div class="leaderboard">
+            🏆 Leaderboard
+        </div>
 
-    <section>
-        <h2>📖 Rules</h2>
-    </section>
+        <div class="accountBox">
+            My Account
+        </div>
 
-    <section>
-        <h2>❓ Q&A</h2>
-    </section>
+    </div>
 
-    <section>
-        <h2>📢 CT Zone</h2>
-    </section>
+    <!-- TABS -->
 
-    <section id="memberArea">
+    <div class="tabMenu">
 
-        <h2>🎮 Player Menu</h2>
+        <button class="tabButton activeTab">
+            Home
+        </button>
 
-        <button class="menu-button">
+        <button class="tabButton">
             Check-in
         </button>
 
-        <button class="menu-button">
-            PLAY
+        <button class="tabButton">
+            Play
         </button>
 
-        <button class="menu-button">
-            My Account
+        <button class="tabButton">
+            Rules
         </button>
 
-    </section>
+        <button class="tabButton">
+            Player Status
+        </button>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="mainLayout">
+
+        <div class="contentArea">
+
+            <h2 class="sectionTitle">
+                📅 Schedule
+            </h2>
+
+            <div class="scheduleCard">
+                Mission Release - Monday
+            </div>
+
+            <div class="scheduleCard">
+                Mini Game - Wednesday
+            </div>
+
+            <div class="scheduleCard">
+                Weekly Recap - Sunday
+            </div>
+
+        </div>
+
+        <div class="ctInfo">
+
+            <h2>📢 CT Info</h2>
+
+            <br>
+
+            <p>
+                Welcome to Week 1!
+            </p>
+
+            <br>
+
+            <p>
+                Next mission starts on Monday.
+            </p>
+
+            <br>
+
+            <p>
+                Check-in closes at 23:59.
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
-
-<script>
-loadPlayer();
-</script>
 
 </body>
 </html>
