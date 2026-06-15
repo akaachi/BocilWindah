@@ -75,7 +75,7 @@ async function checkResult() {
     await client
         .from("applications")
         .select("*")
-        .eq("username_x", username)
+        .eq("username", username)
         .single();
 
     const result =
