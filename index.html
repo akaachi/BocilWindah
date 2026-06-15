@@ -6,6 +6,7 @@
     <title>BocilWindah</title>
 
     <style>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -102,7 +103,7 @@ async function loadPlayer(){
 <body>
 
     <div class="container">
-        <h1>Hi, Bocil Windah! 👋</h1>
+        <h1 id="welcomeText">Loading...</h1>
         <p>Ready to play? 🎮</p>
 
         <button class="menu-button" onclick="location.href='checkin.html'">
