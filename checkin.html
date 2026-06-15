@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Check-In</title>
+
+<style>
+body {
+    background-color: #1e1e2f;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: #2b2b42;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.box {
+    background: #3a3a58;
+    padding: 18px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+input[type="file"], textarea {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    height: 100px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #5a7cff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.reward {
+    text-align: center;
+    margin-top: 20px;
+    color: #ffd95b;
+}
+
+.back {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back a {
+    color: #cccccc;
+    text-decoration: none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>📅 Daily Check-In</h1>
+
+<p><strong>Hi, Shuna! 🌸</strong><br>
+Ready for today's quest?</p>
+
+<div class="box">
+    <h3>💬 Today's Ice Breaker</h3>
+    <p id="dailyQuestion"></p>
+    <p style="font-size:14px; color:#d6d6d6;">
+        Need an opening? Try using today's ice breaker! <br>
+        But don't worry—you can talk about anything you'd like. 💛
+    </p>
+</div>
+
+<div class="box">
+    <h3>🎯 Daily Quest</h3>
+    <p>
+        Interact with another OA member today.<br>
+        You can chat casually, ask for MT, share your day,
+        or simply check in on each other.
+    </p>
+    <p>
+        Upload a screenshot or short video of your interaction below.
+    </p>
+</div>
+
+<h3>📎 Submit Your Daily Quest</h3>
+
+<label>Upload Attachment:</label>
+<input type="file" accept="image/*,video/*">
+
+<label>Additional Notes (optional):</label>
+<textarea placeholder="Write something here..."></textarea>
+
+<button onclick="alert('Quest submitted! +10 Points ✨')">
+🚀 SUBMIT QUEST
+</button>
+
+<div class="reward">
+Reward: +10 Points ✨
+</div>
+
+<div class="back">
+<a href="index.html">← Back to Home</a>
+</div>
+
+</div>
+
+<script>
+const questions = [
+    "How are you feeling today? 🌷",
+    "What's one thing that made you smile today?",
+    "Have you eaten well today? 🍜",
+    "What song have you been listening to lately? 🎵",
+    "What's the best part of your day so far?",
+    "Coffee, tea, or something else today? ☕",
+    "If you could take a short trip right now, where would you go?",
+    "What's a small thing you're grateful for today?",
+    "Have you watched or read anything fun recently?",
+    "What's your comfort food? 🍰",
+    "How would you describe your day in three words?",
+    "What's one thing you're looking forward to this week?",
+    "If today had a soundtrack, what song would it be?",
+    "What's your current favorite emoji? ✨",
+    "Did anything unexpected happen today?",
+    "What's your go-to late night snack?",
+    "If you had one extra free hour today, what would you do?",
+    "What's something you've been enjoying lately?",
+    "How's your energy today, from 1 to 10?",
+    "Tell someone one good thing that happened to you this week. 💛"
+];
+
+const randomQuestion =
+    questions[Math.floor(Math.random() * questions.length)];
+
+document.getElementById("dailyQuestion").innerText = randomQuestion;
+</script>
+
+</body>
+</html>
