@@ -7,22 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1e1e2f;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
+        body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#1e1e2f;
+    color:white;
+}
 
-        .container {
-            width: 90%;
-            max-width: 500px;
-        }
+       .container{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+}
 
         h1 {
             margin-bottom: 5px;
@@ -51,6 +47,10 @@
             transform: scale(1.03);
             background-color: #46466b;
         }
+        
+        #memberArea{
+    display:none;
+}
     </style>
 </head>
 
@@ -70,18 +70,25 @@ supabase.createClient(
     supabaseKey
 );
 
-loadPlayer();
-
 async function loadPlayer(){
-
+console.log(
+    document.getElementById("userArea")
+);
     const username =
         localStorage.getItem("username");
+    const memberArea =
+        document.getElementById("memberArea");
+   if(!username){
 
-    if(!username){
-        document.getElementById("welcomeText")
-        .innerText = "Hi, Guest! 👋";
-        return;
-    }
+    document.getElementById("userArea")
+    .innerHTML = `
+        <button class="menu-button">
+            Login
+        </button>
+    `;
+
+    return;
+}
 
     const { data, error } = await client
         .from("players")
@@ -90,32 +97,81 @@ async function loadPlayer(){
         .limit(1);
 
     if(error || !data || data.length === 0){
-        document.getElementById("welcomeText")
+        document.getElementById("userArea")
         .innerText = "Hi, Player! 👋";
         return;
     }
 
     const player = data[0];
 
-    document.getElementById("welcomeText")
-    .innerText =
-    `Hi, ${player.display_name}! 👋`;
+memberArea.style.display = "block";
+
+document.getElementById("userArea")
+.innerHTML =
+`Hi, ${player.display_name}! 👋`;
 }
 
 </script>
-<body>
 
     <div class="container">
-        <h1 id="welcomeText">Loading...</h1>
-        <p>Ready to play? 🎮</p>
 
-        <button class="menu-button" onclick="location.href='checkin.html'">
-    📅 CHECK-IN
-</button>
-        <button class="menu-button">🎮 PLAY</button>
-        <button class="menu-button">🏆 LEADERBOARD</button>
-        <button class="menu-button">👤 MY ACCOUNT</button>
-    </div>
+    <header>
+
+        <h1>BocilWindah OA</h1>
+
+        <div id="userArea">
+            Loading...
+        </div>
+
+    </header>
+
+    <section>
+        <h2>🏆 Leaderboard</h2>
+    </section>
+
+    <section>
+        <h2>📅 Schedule</h2>
+    </section>
+
+    <section>
+        <h2>🎯 Concept</h2>
+    </section>
+
+    <section>
+        <h2>📖 Rules</h2>
+    </section>
+
+    <section>
+        <h2>❓ Q&A</h2>
+    </section>
+
+    <section>
+        <h2>📢 CT Zone</h2>
+    </section>
+
+    <section id="memberArea">
+
+        <h2>🎮 Player Menu</h2>
+
+        <button class="menu-button">
+            Check-in
+        </button>
+
+        <button class="menu-button">
+            PLAY
+        </button>
+
+        <button class="menu-button">
+            My Account
+        </button>
+
+    </section>
+
+</div>
+
+<script>
+loadPlayer();
+</script>
 
 </body>
 </html>
