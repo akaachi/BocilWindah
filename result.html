@@ -67,21 +67,56 @@ const client = supabase.createClient(
 async function searchResult() {
 
     const username =
-        document.getElementById("username").value.trim();
+        document.getElementById("username")
+        .value
+        .trim();
+
+    const resultBox =
+        document.getElementById("result");
 
     const { data, error } = await client
         .from("applications")
         .select("*")
+        .eq("username", username)
+        .limit(1);
 
-    console.log(data);
-    console.log("ERROR:", error);
+    if (error) {
+        resultBox.innerHTML =
+            "❌ Error loading data";
+        return;
+    }
 
-    document.getElementById("result").innerHTML =
-        "<pre>" +
-        JSON.stringify(data, null, 2) +
-        "</pre>";
+    if (!data || data.length === 0) {
+        resultBox.innerHTML =
+            "🔍 Username not found.";
+        return;
+    }
+
+    const player = data[0];
+
+    if (player.status === "accepted") {
+
+        resultBox.innerHTML = `
+            <h2>🎉 Congratulations!</h2>
+            <p>You have been accepted into BocilWindah OA.</p>
+        `;
+
+    } else if (player.status === "rejected") {
+
+        resultBox.innerHTML = `
+            <h2>💔 We're Sorry</h2>
+            <p>You have not been accepted this time.</p>
+        `;
+
+    } else {
+
+        resultBox.innerHTML = `
+            <h2>⏳ Pending</h2>
+            <p>Your application is still under review.</p>
+        `;
+    }
 }
 </script>
-
+    
 </body>
 </html>
