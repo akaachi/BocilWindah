@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{
+    background:#1e1e2f;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:50px;
+}
+
+input{
+    display:block;
+    margin:10px auto;
+    padding:12px;
+    width:300px;
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#message{
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Login</h1>
+
+<input
+    id="username"
+    placeholder="Username"
+>
+
+<input
+    id="password"
+    type="password"
+    placeholder="Password"
+>
+
+<button onclick="login()">
+    Login
+</button>
+
+<div id="message"></div>
+
+<script>
+
+const supabaseUrl =
+"https://xlrkxskyjjiatvoymylq.supabase.co";
+
+const supabaseKey =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhscmt4c2t5amppYXR2b3lteWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTI3MDIsImV4cCI6MjA5NzA4ODcwMn0.39_bLrPf886g8Vc4zpYiauMQKqAiPoop4qnlMMm9HWI";
+
+const client =
+supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+async function login(){
+
+    const username =
+        document.getElementById("username")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    const { data, error } = await client
+        .from("players")
+        .select("*")
+        .eq("username", username)
+        .eq("password", password)
+        .eq("account_claimed", true)
+        .limit(1);
+
+    if(error){
+        document.getElementById("message")
+        .innerHTML = "Login error.";
+        return;
+    }
+
+    if(!data || data.length === 0){
+        document.getElementById("message")
+        .innerHTML = "Invalid username or password.";
+        return;
+    }
+
+    localStorage.setItem(
+        "username",
+        username
+    );
+
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
