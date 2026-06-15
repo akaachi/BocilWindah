@@ -47,7 +47,7 @@ button{
     placeholder="@username"
 />
 
-<button onclick="checkResult()">
+<button onclick="searchResult()">
 Search
 </button>
 
@@ -55,48 +55,32 @@ Search
 
 <script>
 
-// GANTI NANTI
 const supabaseUrl =
 "https://xlrkxskyjjiatvoymylq.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhscmt4c2t5amppYXR2b3lteWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MTI3MDIsImV4cCI6MjA5NzA4ODcwMn0.39_bLrPf886g8Vc4zpYiauMQKqAiPoop4qnlMMm9HWI";
 
-const client =
-supabase.createClient(
+const client = supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
 
-async function checkResult() {
+async function searchResult() {
 
     const username =
-    document.getElementById("username").value;
+        document.getElementById("username").value.trim();
 
-    const { data, error } =
-    await client
+    const { data, error } = await client
         .from("applications")
         .select("*")
         .eq("username", username);
 
-console.log("DATA:", data);
-console.log("ERROR:", error);
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
 
-    const result =
-    document.getElementById("result");
-
-if(error || !data){
-    result.innerHTML =
-    `
-    <h2>❌ Username Not Found</h2>
-    `;
-    return;
-
-result.innerHTML = `
-<h2>DEBUG MODE</h2>
-
-<p>Status: ${data.status}</p>
-
-<pre>${JSON.stringify(data, null, 2)}</pre>
-`;
+    document.getElementById("result").innerHTML =
+        "<pre>" +
+        JSON.stringify(data, null, 2) +
+        "</pre>";
 }
 </script>
 
