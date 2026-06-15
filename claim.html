@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Claim Your Slot</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{
+    background:#1e1e2f;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:50px;
+}
+
+input{
+    display:block;
+    margin:10px auto;
+    padding:12px;
+    width:300px;
+}
+
+button{
+    padding:12px 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Claim Your Slot</h1>
+
+<p id="usernameText"></p>
+
+<input id="displayName" placeholder="Display Name">
+
+<input
+    id="password"
+    type="password"
+    placeholder="Password">
+
+<input
+    id="confirmPassword"
+    type="password"
+    placeholder="Confirm Password">
+
+<button onclick="claimAccount()">
+    Activate Account
+</button>
+
+<div id="message"></div>
+
+<script>
+
+const supabaseUrl =
+"https://xlrkxskyjjiatvoymylq.supabase.co";
+
+const supabaseKey =
+"PASTE_KEY_YANG_SAMA";
+
+const client =
+supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+const params =
+new URLSearchParams(window.location.search);
+
+const username =
+params.get("username");
+
+document.getElementById("usernameText")
+.innerText = "Username: " + username;
+
+async function claimAccount() {
+
+    const displayName =
+        document.getElementById("displayName").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    if(password !== confirmPassword){
+        document.getElementById("message")
+        .innerHTML = "Passwords do not match";
+        return;
+    }
+
+    const { error } = await client
+        .from("players")
+        .update({
+            display_name: displayName,
+            password: password,
+            account_claimed: true
+        })
+        .eq("username", username);
+
+    if(error){
+        document.getElementById("message")
+        .innerHTML = "Error saving account";
+        return;
+    }
+
+    document.getElementById("message")
+    .innerHTML =
+    "🎉 Account Activated!";
+}
+
+</script>
+
+</body>
+</html>
