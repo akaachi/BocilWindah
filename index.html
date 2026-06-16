@@ -161,6 +161,41 @@ body{
     margin-bottom:15px;
 }
 
+    /* ====================
+   ACCOUNT DROPDOWN
+==================== */
+
+.accountContainer{
+    position:relative;
+}
+
+.dropdownMenu{
+    display:none;
+
+    position:absolute;
+    top:100%;
+    right:0;
+
+    width:180px;
+
+    background:#32324a;
+
+    border-radius:12px;
+
+    margin-top:10px;
+
+    overflow:hidden;
+}
+
+.dropdownItem{
+    padding:15px;
+    cursor:pointer;
+}
+
+.dropdownItem:hover{
+    background:#46466b;
+}
+    
 </style>
 </head>
 
@@ -190,8 +225,16 @@ body{
             🏆 Leaderboard
         </div>
 
-        <div class="accountBox" id="accountBox">
-    My Account
+        <div class="accountContainer">
+
+    <div class="accountBox" id="accountBox">
+        My Account ▼
+    </div>
+
+    <div class="dropdownMenu" id="dropdownMenu">
+
+    </div>
+
 </div>
 
 </div>
