@@ -195,6 +195,52 @@ body{
 .dropdownItem:hover{
     background:#46466b;
 }
+    .accountBox{
+
+    width:220px;
+    height:120px;
+
+    background:#32324a;
+    border-radius:20px;
+
+    padding:15px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    cursor:pointer;
+}
+
+.accountTop{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.avatar{
+    font-size:32px;
+}
+
+.accountInfo{
+    display:flex;
+    flex-direction:column;
+}
+
+#displayName{
+    font-weight:bold;
+}
+
+#usernameText{
+    font-size:13px;
+    color:#cccccc;
+}
+
+.accountBottom{
+    border-top:1px solid rgba(255,255,255,0.15);
+    padding-top:8px;
+    font-size:14px;
+}
     
 </style>
 </head>
@@ -227,9 +273,33 @@ body{
 
         <div class="accountContainer">
 
-    <div class="accountBox" id="accountBox">
+   <div class="accountBox" id="accountBox">
+
+    <div class="accountTop">
+
+        <div class="avatar">
+            👤
+        </div>
+
+        <div class="accountInfo">
+
+            <div id="displayName">
+                Guest
+            </div>
+
+            <div id="usernameText">
+                Not Logged In
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="accountBottom">
         My Account ▼
     </div>
+
+</div>
 
     <div class="dropdownMenu" id="dropdownMenu">
 
@@ -307,7 +377,15 @@ const welcomeText =
 const tabMenu =
     document.getElementById("tabMenu");
 
-if(username){
+iif(username){
+
+    document.getElementById("displayName")
+    .innerText = username;
+
+    document.getElementById("usernameText")
+    .innerText = "@"+username;
+
+}
 
     welcomeText.innerText =
         `Hi, ${username}! 👋`;
