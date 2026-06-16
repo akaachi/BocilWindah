@@ -409,7 +409,17 @@ if(username){
             Player Status
         </button>
     `;
+dropdownMenu.innerHTML = `
+    <div class="dropdownItem">
+        Data
+    </div>
 
+    <div class="dropdownItem"
+         onclick="logout()">
+        Logout
+    </div>
+`;
+    
 }else{
 
     welcomeText.innerText =
@@ -428,9 +438,42 @@ if(username){
             Rules
         </button>
     `;
+dropdownMenu.innerHTML = `
+    <div class="dropdownItem"
+         onclick="location.href='login.html'">
+        Login
+    </div>
+`;
+    
+}
+const accountBox =
+    document.getElementById("accountBox");
+
+const dropdownMenu =
+    document.getElementById("dropdownMenu");
+
+accountBox.onclick = function(){
+
+    if(dropdownMenu.style.display === "block"){
+
+        dropdownMenu.style.display = "none";
+
+    }else{
+
+        dropdownMenu.style.display = "block";
+
+    }
 
 }
 
+    function logout(){
+
+    localStorage.removeItem("username");
+
+    location.reload();
+
+}
+    
 </script>
 </body>
 </html>
