@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BocilWindah OA</title>
+<title>BocilWindah</title>
 
 <style>
 
@@ -377,15 +377,13 @@ const welcomeText =
 const tabMenu =
     document.getElementById("tabMenu");
 
-iif(username){
+if(username){
 
     document.getElementById("displayName")
     .innerText = username;
 
     document.getElementById("usernameText")
     .innerText = "@"+username;
-
-}
 
     welcomeText.innerText =
         `Hi, ${username}! 👋`;
